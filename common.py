@@ -1,4 +1,3 @@
-import urllib2
 import urllib
 import config
 import json
@@ -12,11 +11,11 @@ def bing_search(query, search_type, limit):
         credentials = (':%s' % key).encode('base64')[:-1]
         auth = 'Basic %s' % credentials
         url = 'https://api.datamarket.azure.com/Data.ashx/Bing/Search/'+search_type+'?Query=%27'+query+'%27&$top=+'+str(limit)+'&$format=json'
-        request = urllib2.Request(url)
+        request = urllib.request(url)
         request.add_header('Authorization', auth)
         request.add_header('User-Agent', user_agent)
         request_opener = urllib2.build_opener()
-        response = request_opener.open(request) 
+        response = request.urlopen(request) 
         response_data = response.read()
         json_result = json.loads(response_data)
         result_list = json_result['d']['results']
