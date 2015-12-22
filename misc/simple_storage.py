@@ -1,18 +1,25 @@
-import sqlite3
+import shelve
 
 class Storage:
     
     instance = Storage()
     
     def __init__():
-        self.conn = sqlite3.connect('db/small.db')
+        self.db = shelve.open('db/small.db')
         
         
-    def save(self,table,data):
-        conn.execute("create table if not exists %(table)s (id integer,data string)")
+    def save(self,key,value):
+        self.db[key] = value
+        
                 
-    def load(self,table, when):
-        """достаем"""
+    def load(self,key):
+        return self.db[key]
+    
+    def keys(self):
+        return self.db[key]
+
+    def clean(self,key):
+        del self.db[key]
         
 def instance():
     return Storage.instance
