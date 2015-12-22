@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 class Pants:
     
-    def __init__(self,bot):
-        self.bot = bot;
+    def __init__(self,bot,api):
+        self.bot = bot; 
+        self.api = api;
         
     def listener(self,message):
         text = message.text.lstrip('/pants')
@@ -14,9 +15,9 @@ class Pants:
             if '_' in prefix:
                 prefix='`'+prefix+'`'
         print(prefix)
-        text = prefix+", у тебя в штанах *".decode("utf-8")+text.strip().upper()+"*!"
+        text = prefix+", у тебя в штанах *"+text.strip().upper()+"*!"
         if text:
-            self.bot.send_message(message.chat.id,text, parse_mode='Markdown')
+            self.api.send_message(message.chat.id,text, parse_mode='Markdown')
 
-def main(bot):
-    return Pants(bot)
+def main(bot,api):
+    return Pants(bot,api)
