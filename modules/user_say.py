@@ -6,8 +6,6 @@ class Say:
         self.bot = bot; 
         self.api = api;
         
-
-        
     def listener(self,message):
         text = message.text.lstrip('/say')
 
@@ -21,10 +19,17 @@ class Say:
     
     def make_auidio(self,text):
         #os.system('export $(dbus-launch)')
-        os.system('echo %(text)s | RHVoice-client -s Irina > /tmp/tmp.wav' % {'text':text})
+        os.system('echo %(text)s | RHVoice-client -s Irina > /tmp/tmp.wav' % {'text':self.process_text(text)})
         os.system('sox /tmp/tmp.wav /tmp/tmp.ogg')
         os.system('rm /tmp/tmp.wav')
         return open('/tmp/tmp.ogg','rb')
-
+    
+    def process_text(self,text):
+        text = text.replace("'", ' ')
+        text = text.replace('"', ' ')
+        text = text.replace('|', ' ')
+        text = text.replace('\n', ' ')
+        return text
+        
 def main(bot,api):
     return Say(bot,api)
