@@ -121,12 +121,11 @@ class Bot:
         """
         Process an update
         """
-        
+        print(messages)
         for m in messages:
+           
             try:
-
                 if m.content_type=='text':
-                    
                     print("("+str(m.chat.id)+") "+str(m.chat.username)+': '+m.text)
                     if hasattr(m,'reply_to_message'):
                         # а вот тут проверяем не является ли сообщение ответом,
