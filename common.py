@@ -19,7 +19,7 @@ def bing_search(query, search_type, limit):
         request_opener = urllib.request.build_opener()
         response = request_opener.open(request) 
         response_data = response.read()
-        json_result = json.loads(str(ressponse_data,'utf-8'))
+        json_result = json.loads(str(response_data,'utf-8'))
         result_list = json_result['d']['results']
         if len(result_list)==0:
                 result_list = list([{

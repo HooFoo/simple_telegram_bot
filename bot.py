@@ -121,9 +121,11 @@ class Bot:
         """
         Process an update
         """
-        print(messages)
+        #странный баг с повторяющимися сообщениями. Накостылил
+        #print(messages)
+        #messages = self.filter_duplicates(messages)
         for m in messages:
-           
+            print(m)
             try:
                 if m.content_type=='text':
                     print("("+str(m.chat.id)+") "+str(m.chat.username)+': '+m.text)
@@ -176,3 +178,14 @@ class Bot:
         
     def get_commands(self):
         return self.commands
+        
+    def filter_duplicates(self,lst):
+        a =[]
+        cnt = 0
+        for msg in lst:
+            for msg2 in lst:
+                if msg.message_id == msg2.message_id:
+                    cnt+=1
+            if cnt==2:
+                a.append(msg)
+        return a
